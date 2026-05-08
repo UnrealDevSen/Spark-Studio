@@ -1,26 +1,24 @@
-import type {Metadata} from 'next';
-import { Outfit, Inter } from 'next/font/google';
-import './globals.css';
+import type { Metadata } from "next";
+import { Inter, Outfit, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
 
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-outfit',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const jbMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
 
 export const metadata: Metadata = {
-  title: 'Spark Studio',
-  description: 'AI Creator Growth Platform',
+  title: "Spark AI",
+  description: "AI-powered Streamer Dashboard",
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en">
-      <body className={`${outfit.variable} ${inter.variable} font-sans antialiased bg-[#05060A]`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} ${jbMono.variable}`}>
+      <body className="antialiased font-sans text-white">
         {children}
       </body>
     </html>

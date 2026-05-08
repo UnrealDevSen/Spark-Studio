@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the application",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "tier": { "type": "string", "enum": ["free", "premium"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "name", "tier", "createdAt", "updatedAt"]
+    },
+    "Stream": {
+      "title": "Stream Data",
+      "description": "Historical stream analytics data for a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "platform": { "type": "string", "enum": ["Twitch", "YouTube"] },
+        "peakViewers": { "type": "number" },
+        "views": { "type": "number" },
+        "avgRetention": { "type": "number", "description": "Average retention in minutes" },
+        "chatEngaged": { "type": "number", "description": "Messages per minute" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "platform", "peakViewers", "views", "avgRetention", "chatEngaged", "createdAt", "updatedAt"]
+    },
+    "IntegrationData": {
+      "title": "Integration Settings",
+      "description": "User connection status to different platforms",
+      "type": "object",
+      "properties": {
+        "twitchConnected": { "type": "boolean" },
+        "youtubeConnected": { "type": "boolean" },
+        "instagramConnected": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["twitchConnected", "youtubeConnected", "instagramConnected", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Stores user profiles"
+    },
+    "users/{userId}/streams/{streamId}": {
+      "schema": "Stream",
+      "description": "Stores individual stream data for the user"
+    },
+    "users/{userId}/integrations/status": {
+      "schema": "IntegrationData",
+      "description": "Stores integration enablement status"
+    }
+  }
+}
